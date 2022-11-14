@@ -1,0 +1,6 @@
+[submodule "auth-service"]
+	path = auth-service
+	url = git@github.com:StasUssanov/test-svisitom-auth-service.git
+[submodule "api-gate"]
+	path = api-gate
+	url = git@github.com:StasUssanov/test-svisitom-api-gate.git

@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  database:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./databases-postgres:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: ${DATASOURCE_USERNAME:-root}
+      POSTGRES_PASSWORD: ${DATASOURCE_PASSWORD:-root}
+    restart: always
+
+  auth-service:
+    container_name: auth_service
+    build:
+      context: auth-service
+    #ports:
+    #  - "${AUTH_SERVICE_PORT:-8010}:8010"
+    environment:
+      - DATASOURCE_HOST=database
+      - SPRING_DATASOURCE_USERNAME=${DATASOURCE_USERNAME:-root}
+      - SPRING_DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD:-root}
+      #- JWT_SECRET=${JWT_SECRET:-secret}
+      - JWT_ACCESS_TOKEN_LIFETIME_MINUTES=${JWT_ACCESS_TOKEN_LIFETIME_MINUTES:-720}
+      - JWT_REFRESH_TOKEN_LIFETIME_MINUTES=${JWT_REFRESH_TOKEN_LIFETIME_MINUTES:-21600}
+    depends_on:
+      - database
+    restart: always
+
+  api-gate:
+    container_name: api_gate
+    build:
+      context: api-gate
+    ports:
+      - "${API_GATE_PORT:-8080}:8080"
+    environment:
+      - AUTH_SERVER_URL=${AUTH_SERVER_URL:-http://auth-service:8010}
+    depends_on:
+      - auth-service
+    restart: always
