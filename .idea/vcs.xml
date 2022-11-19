@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/api-gate" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/auth-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/core" vcs="Git" />
   </component>
 </project>
