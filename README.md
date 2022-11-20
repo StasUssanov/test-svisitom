@@ -1,5 +1,19 @@
 # Тестовое задание на работу с таблицами.
 
+## Запуск
+
+```shell
+  git clone --recurse-submodules https://github.com/StasUssanov/test-svisitom.git
+```
+```shell
+  git submodule update --remote
+```
+```shell
+  docker-compose up --build
+```
+
+## Задание
+
 1. Технологии.
    - Vue JS или React
    - JS
