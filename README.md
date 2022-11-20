@@ -6,7 +6,7 @@
   git clone --recurse-submodules https://github.com/StasUssanov/test-svisitom.git
 ```
 ```shell
-$ cd test-svisitom
+  cd test-svisitom
 ```
 ```shell
   git submodule update --remote
